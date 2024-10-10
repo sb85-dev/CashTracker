@@ -1,0 +1,29 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @account %>
+
+<div>
+  <%= link_to "Edit this account", edit_account_path(@account) %> 
+  <%= link_to "Back to accounts", accounts_path %>
+  <%= link_to 'Budget', budget_account_path(@account), class: 'btn btn-info' %>
+  <%= button_to "Destroy this account", account_path(@account), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+</div>
+
+# AI code
+<h1><%= @account.name %></h1>
+<p>Balance: <%= number_to_currency(@account.balance) %></p>
+
+<%= link_to 'New Transaction', new_account_transaction_path(@account), class: 'btn btn-primary' %>
+<%= link_to 'Edit Account', edit_account_path(@account), class: 'btn btn-secondary' %>
+<%= link_to 'Back to Accounts', accounts_path, class: 'btn btn-light' %>
+
+<h2>Transactions</h2>
+<ul>
+  <% @account.transactions.each do |transaction| %>
+    <li>
+      Amount: <%= number_to_currency(transaction.amount) %> - Type: <%= transaction.transaction_type %>
+      <%= link_to 'View', account_transactions_path(@account), class: 'btn btn-primary' %>
+      <%= link_to 'Edit', edit_account_transaction_path(@account, transaction), class: 'btn btn-secondary' %>
+      <%= link_to 'Delete', account_transactions_path(@account, transaction), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    </li>
+  <% end %>

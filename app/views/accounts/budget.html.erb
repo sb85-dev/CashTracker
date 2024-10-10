@@ -1,0 +1,28 @@
+<h1><%= @account.name %> Budget</h1>
+
+<h2>Incomes</h2>
+<%= link_to 'Add Income', new_account_income_path(@account), class: 'btn btn-primary' %>
+<ul>
+  <% @account.incomes.each do |income| %>
+    <li><%= income.source %>: <%= number_to_currency(income.amount) %> - 
+    <%= link_to 'Edit', edit_account_income_path(@account, income), class: 'btn btn-secondary' %>
+    <%= link_to 'Delete', account_income_path(@account, income), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Expenses</h2>
+<%= link_to 'Add Expense', new_account_expense_path(@account), class: 'btn btn-primary' %>
+<ul>
+  <% @account.expenses.each do |expense| %>
+    <li><%= expense.category %>: <%= number_to_currency(expense.amount) %> - 
+    <%= link_to 'Edit', edit_account_expense_path(@account, expense), class: 'btn btn-secondary' %>
+    <%= link_to 'Delete', account_expense_path(@account, expense), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    </li>
+  <% end %>
+</ul>
+
+<h3>Remainder</h3>
+<p><%= number_to_currency(@account.incomes.sum(:amount) - @account.expenses.sum(:amount)) %></p>
+
+<%= link_to 'Back to Account', account_path(@account), class: 'btn btn-light' %>

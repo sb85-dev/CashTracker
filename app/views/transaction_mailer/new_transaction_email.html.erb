@@ -1,0 +1,5 @@
+<p>Hello <%= @follower.name %>,</p>
+<p>A new transaction has been posted to an account you're following:</p>
+<p>Amount: <%= number_to_currency(@transaction.amount) %><br>
+Type: <%= @transaction.transaction_type %><br>
+Notes: <%= @transaction.notes 
