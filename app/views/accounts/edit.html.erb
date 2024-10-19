@@ -1,12 +1,12 @@
-<% content_for :title, "Editing account" %>
+<% content_for :title, "Editing Account" %>
 
-<h1>Editing account</h1>
-
-<%= render "form", account: @account %>
-
-<br>
-
-<div>
-  <%= link_to "Show this account", @account %> |
-  <%= link_to "Back to accounts", accounts_path %>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Editing Account</h1>
+  <div class="card p-4" style="max-width: 500px; margin: auto;">
+    <%= render "form", account: @account %>
+  </div>
+  <div class="text-center mt-3">
+    <%= link_to "Show this account", @account, class: "btn btn-info" %> |
+    <%= link_to "Back to accounts", accounts_path, class: "btn btn-secondary" %>
+  </div>
 </div>

@@ -1,22 +1,5 @@
-<div id="<%= dom_id transaction %>">
-  <p>
-    <strong>Amount:</strong>
-    <%= transaction.amount %>
-  </p>
-
-  <p>
-    <strong>Transaction type:</strong>
-    <%= transaction.transaction_type %>
-  </p>
-
-  <p>
-    <strong>Notes:</strong>
-    <%= transaction.notes %>
-  </p>
-
-  <p>
-    <strong>Account:</strong>
-    <%= transaction.account_id %>
-  </p>
-
-</div>
+# <tr id="<%= dom_id(transaction) %>" onclick="window.location='<%= account_transaction_path(@account, transaction) %>'" style="cursor:pointer;">
+#   <td><%= number_to_currency(transaction.amount) %></td>
+#   <td><%= transaction.transaction_type %></td>
+#   <td class="text-right"><%= transaction.created_at.strftime('%m/%d/%y') %></td>
+# </tr>

@@ -1,3 +1,7 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<p>Get started by <%= link_to 'signing in', new_user_session_path %>.</p>
+<body class="login-page">
+    <div class="login-background-container">
+        <div class="login-text">
+            <%=button_to "Sign in / Sign up", new_user_session_path, class:"btn btn-primary"%>
+        </div>
+    </div>
+</body>

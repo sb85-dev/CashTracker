@@ -13,3 +13,52 @@
  *= require_tree .
  *= require_self
  */
+ .fixed-bottom {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #faf8fa; /* Adjust the background color if needed */
+    border-top: 1px solid #dee2e6; /* Optional: adds a top border */
+ }  
+ body {
+   padding-top: 60px; /* Adjust this value as needed */
+   padding-bottom: 90px; /* Adjust the value if necessary */
+ }
+ body.login-page {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+body.login-page .login-background-container {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('/assets/login-screen.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+}
+.login-text {
+  margin-bottom: 20px;
+  text-align: center;
+  color: white;
+}
+.form-select {
+  border-radius: 5px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow: 5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+.form-select:hover {
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+}
+.form-select:focus {
+  outline: none;
+  box-shadow: 0 0 10px #719ece;
+}

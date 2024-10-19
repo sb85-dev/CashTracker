@@ -1,38 +1,36 @@
-<%= form_with(model: [account, transaction], local: true) do |form| %>
-  <% if transaction.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
-
+<%= form_with(model: [@account, @transaction], local: true) do |form| %>
+  <% if @transaction.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
       <ul>
-        <% transaction.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% @transaction.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= form.label :amount %>
-    <%= form.number_field :amount, step: 0.01, class: 'form-control' %>
+  <div class="form-group mb-3">
+    <%= form.label :amount, class: "form-label" %>
+    <%= form.number_field :amount, step: 0.01, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :transaction_type %>
-    <%= form.select :transaction_type, options_for_select([['Deposit', 'deposit'], ['Withdrawal', 'withdrawal']]), class: 'form-control' %>
+  <div class="form-group mb-3">
+    <%= form.label :transaction_type, class: "form-label" %>
+    <%= form.select :transaction_type, options_for_select([['Deposit', 'deposit'], ['Withdrawal', 'withdrawal']]), class: 'form-select' %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :notes %>
-    <%= form.text_area :notes, class: 'form-control' %>
+  <div class="form-group mb-3">
+    <%= form.label :notes, class: "form-label" %>
+    <%= form.text_area :notes, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :document %>
-    <%= form.file_field :document, class: 'form-control' %>
+  <div class="form-group mb-3">
+    <%= form.label :document, class: "form-label" %>
+    <%= form.file_field :document, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.submit class: 'btn btn-primary' %>
+  <div class="d-flex justify-content-center mb-3">
+    <%= form.submit "Submit", class: "btn btn-primary", style: "width: 100%;" %>
   </div>
 <% end %>
-

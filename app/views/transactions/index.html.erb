@@ -1,16 +1,51 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Transactions</h1>
+  <div class="card p-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Type</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transactions.each do |transaction| %>
+          <tr id="<%= dom_id(transaction) %>" onclick="window.location='<%= account_transaction_path(@account, transaction) %>'" style="cursor:pointer;">
+            <td><%= number_to_currency(transaction.amount) %></td>
+            <td><%= transaction.transaction_type %></td>
+            <td><%= transaction.created_at.strftime("%B %d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<% content_for :title, "Transactions" %>
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <% if @page > 0 %>
+          <li class="page-item">
+            <%= link_to 'First Page', account_transactions_path(@account, page: 0), class: "page-link" %>
+          </li>
+          <li class="page-item">
+            <%= link_to 'Previous Page', account_transactions_path(@account, page: @page - 1), class: "page-link" %>
+          </li>
+        <% end %>
+        <% if @page < @total_pages - 1 %>
+          <li class="page-item">
+            <%= link_to 'Next Page', account_transactions_path(@account, page: @page + 1), class: "page-link" %>
+          </li>
+          <li class="page-item">
+            <%= link_to 'Last Page', account_transactions_path(@account, page: @total_pages - 1), class: "page-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
 
-<h1>Transactions</h1>
-
-<div id="transactions">
-  <% @transactions.each do |transaction| %>
-    <%= render transaction %>
-    <p>
-    <%= link_to "Show this transaction", account_transaction_path(@account, @transaction) %>
-    </p>
-  <% end %>
+  <div class="fixed-bottom">
+    <div class="d-flex justify-content-around mb-3">
+      <%= link_to 'Back to Account', account_path(@account), class: 'btn btn-secondary' %>
+      <%= link_to 'New Transaction', new_account_transaction_path(@account), class: 'btn btn-success' %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New transaction", new_account_transaction_path(@account) %>

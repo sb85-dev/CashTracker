@@ -1,31 +1,50 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <p class="text-success"><%= notice %></p>
+  <% content_for :title, "Accounts" %>
 
-<% content_for :title, "Accounts" %>
+  <h1 class="mb-4">Your Accounts</h1>
+  <div class="row" id="accounts">
+    <% @owned_accounts.each do |account| %>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title text-center mb-0"><%= account.name %></h5>
+          </div>
+          <div class="card-body">
+            <h1 class="card-text text-center mb-3"><%= number_to_currency(account.balance) %></h1>
+            <div class="d-flex justify-content-center">
+              <%= link_to "Show this account", account, class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<h1>Accounts</h1>
-
-<div id="accounts">
-  <% @accounts.each do |account| %>
-    <%= render account %>
-    <p>
-      <%= link_to "Show this account", account %>
-    </p>
+  <% if @followed_accounts.any? %>
+    <h2 class="mt-5 mb-4">Accounts You Follow</h2>
+    <div class="row" id="followed-accounts">
+      <% @followed_accounts.each do |account| %>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title text-center mb-0"><%= account.name %></h5>
+            </div>
+            <div class="card-body">
+              <h1 class="card-text text-center mb-3"><%= number_to_currency(account.balance) %></h1>
+              <div class="d-flex justify-content-center">
+                <%= link_to "Show this account", account, class: "btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   <% end %>
+
+  <div class="fixed-bottom">
+    <div class="d-flex justify-content-center">
+      <%= link_to "New account", new_account_path, class: "btn btn-success" %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New account", new_account_path %>
-
-# AI code
-<h1>Your Accounts</h1>
-
-<%= link_to 'Create New Account', new_account_path, class: 'btn btn-primary' %>
-
-<ul>
-  <% @accounts.each do |account| %>
-    <li>
-      <%= link_to account.name, account %> - Balance: <%= number_to_currency(account.balance) %>
-      <%= link_to 'Edit', edit_account_path(account), class: 'btn btn-secondary' %>
-      <%= link_to 'Delete', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-    </li>
-  <% end %>
-</ul>

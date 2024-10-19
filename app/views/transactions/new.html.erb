@@ -1,11 +1,11 @@
-<% content_for :title, "New transaction" %>
+<% content_for :title, "New Transaction" %>
 
-<h1>New transaction</h1>
-
-<%= render 'form', account: @account, transaction: @transaction %>
-
-<br>
-
-<div>
-  <%= link_to "Back to transactions", account_transactions_path %>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">New Transaction</h1>
+  <div class="card p-4" style="max-width: 500px; margin: auto;">
+    <%= render 'form', account: @account, transaction: @transaction %>
+  </div>
+  <div class="text-center mt-3">
+    <%= link_to "Back to transactions", account_transactions_path(@account), class: 'btn btn-secondary' %>
+  </div>
 </div>

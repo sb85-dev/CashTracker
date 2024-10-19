@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # create budget view
   def budget
@@ -7,11 +8,14 @@ class AccountsController < ApplicationController
 
   # GET /accounts or /accounts.json
   def index
-    @accounts = Account.all
+    @owned_accounts = current_user.accounts
+    @followed_accounts = Account.joins(:invites).where(invites: { user: current_user, status: 'accepted' })
   end
+  
 
   # GET /accounts/1 or /accounts/1.json
   def show
+    @transactions = @account.transactions
   end
 
   # GET /accounts/new

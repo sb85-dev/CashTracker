@@ -1,11 +1,11 @@
-<% content_for :title, "New account" %>
+<% content_for :title, "New Account" %>
 
-<h1>New account</h1>
-
-<%= render "form", account: @account %>
-
-<br>
-
-<div>
-  <%= link_to "Back to accounts", accounts_path %>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">New Account</h1>
+  <div class="card p-4" style="max-width: 500px; margin: auto;">
+    <%= render "form", account: @account %>
+  </div>
+  <div class="text-center mt-3">
+    <%= link_to "Back to accounts", accounts_path, class: "btn btn-secondary" %>
+  </div>
 </div>

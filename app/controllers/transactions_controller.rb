@@ -1,16 +1,18 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show edit update destroy ]
   before_action :set_account
+  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource :account
+  load_and_authorize_resource through: :account
 
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.all
+    @page = params.fetch(:page, 0).to_i
+    @transactions = @account.transactions.order(created_at: :desc).offset(@page * 10).limit(10)
+    @total_pages = (@account.transactions.count / 10.0).ceil
   end
 
   # GET /transactions/1 or /transactions/1.json
   def show
-    @account = Account.find(params[:id])
-    @transaction = @account.transaction.find(params[:transaction_id]) if params[:transaction_id]
   end
 
   # GET /transactions/new
@@ -55,7 +57,7 @@ class TransactionsController < ApplicationController
     @transaction.destroy!
 
     respond_to do |format|
-      format.html { redirect_to transactions_path, status: :see_other, notice: "Transaction was successfully destroyed." }
+      format.html { redirect_to account_transactions_path, status: :see_other, notice: "Transaction was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -63,16 +65,16 @@ class TransactionsController < ApplicationController
   private
 
     def set_account
-      @account = current_user.accounts.find(params[:account_id])
+      @account = Account.find(params[:account_id])
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
-      @transaction = Transaction.find(params[:id])
+      @transaction = @account.transactions.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:amount, :transaction_type, :notes, :account_id)
+      params.require(:transaction).permit(:amount, :transaction_type, :notes, :account_id, :document)
     end
 end

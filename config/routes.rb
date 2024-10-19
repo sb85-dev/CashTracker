@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :invites, only: [:create]
     resources :incomes, only: [:new, :create, :edit, :update, :destroy]
     resources :expenses, only: [:new, :create, :edit, :update, :destroy]
-    resources :transactions
+    resources :transactions, only: [:new, :create, :edit, :update, :show, :destroy, :index]
   end
   devise_for :users
 
