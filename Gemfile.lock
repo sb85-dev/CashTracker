@@ -172,13 +172,15 @@ GEM
     parser (3.3.5.0)
       ast (~> 2.4.1)
       racc
+    pg (1.5.8)
+    pg (1.5.8-x64-mingw-ucrt)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
     puma (6.4.3)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.1.7)
+    rack (3.1.8)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -268,8 +270,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sidekiq (7.3.2)
-      concurrent-ruby (< 2)
+    sidekiq (7.3.4)
       connection_pool (>= 2.3.0)
       logger
       rack (>= 2.2.4)
@@ -330,6 +331,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   letter_opener
+  pg
   puma (>= 5.0)
   rails (~> 7.2.1)
   rubocop-rails-omakase
