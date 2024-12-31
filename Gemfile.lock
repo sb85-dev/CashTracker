@@ -80,7 +80,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
-    brakeman (6.2.1)
+    brakeman (7.0.0)
       racc
     builder (3.3.0)
     cancancan (3.6.1)
@@ -172,6 +172,8 @@ GEM
     parser (3.3.5.0)
       ast (~> 2.4.1)
       racc
+    pg (1.5.9)
+    pg (1.5.9-x64-mingw-ucrt)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
@@ -330,6 +332,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   letter_opener
+  pg
   puma (>= 5.0)
   rails (~> 7.2.1)
   rubocop-rails-omakase
